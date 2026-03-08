@@ -1,6 +1,7 @@
 """Tests for the model serving API."""
 
 import numpy as np
+import pandas as pd
 import pytest
 from fastapi.testclient import TestClient
 
@@ -18,8 +19,9 @@ def client(tmp_path, monkeypatch):
 
     le = LabelEncoder()
     le.fit(classes)
+    feature_names = [f"feature_{i}" for i in range(n_features)]
     scaler = StandardScaler()
-    scaler.fit(np.random.randn(50, n_features))
+    scaler.fit(pd.DataFrame(np.random.randn(50, n_features), columns=feature_names))
 
     model = RandomForestClassifier(n_estimators=10, random_state=42)
     X_mock = scaler.transform(np.random.randn(50, n_features))
