@@ -21,6 +21,9 @@ dvc==3.59.1
 pytest==8.3.4
 httpx==0.28.1
 
+# Data source
+ucimlrepo==0.0.7
+
 # Utilities
 joblib==1.4.2
 pyyaml==6.0.2
