@@ -23,10 +23,9 @@ def fetch_steel_plates_data(output_path: str = "data/raw/steel_plates_faults.csv
     targets = dataset.data.targets
 
     # Targets are one-hot encoded across 7 columns — convert to single label
-    fault_types = targets.columns.tolist()
-    targets["fault_type"] = targets.idxmax(axis=1)
+    fault_labels = targets.idxmax(axis=1)
 
-    df = pd.concat([features, targets["fault_type"]], axis=1)
+    df = pd.concat([features, fault_labels.rename("fault_type")], axis=1)
     df.to_csv(output_path, index=False)
 
     print(f"Dataset saved to {output_path}")
