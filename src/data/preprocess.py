@@ -2,11 +2,11 @@
 
 import os
 
+import joblib
 import pandas as pd
 import yaml
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler, LabelEncoder
-import joblib
+from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 
 def load_config(config_path: str = "configs/model_config.yaml") -> dict:
@@ -55,9 +55,7 @@ def preprocess(config_path: str = "configs/model_config.yaml") -> dict:
     X_train_scaled = pd.DataFrame(
         scaler.fit_transform(X_train), columns=X.columns, index=X_train.index
     )
-    X_test_scaled = pd.DataFrame(
-        scaler.transform(X_test), columns=X.columns, index=X_test.index
-    )
+    X_test_scaled = pd.DataFrame(scaler.transform(X_test), columns=X.columns, index=X_test.index)
 
     # Save processed data
     X_train_scaled.to_csv(os.path.join(processed_path, "X_train.csv"), index=False)

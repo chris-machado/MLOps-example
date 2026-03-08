@@ -68,10 +68,9 @@ def train(config_path: str = "configs/model_config.yaml") -> str:
         mlflow.log_text(report, "classification_report.txt")
 
         # Log feature importances
-        importances = pd.DataFrame({
-            "feature": X_train.columns,
-            "importance": model.feature_importances_
-        }).sort_values("importance", ascending=False)
+        importances = pd.DataFrame(
+            {"feature": X_train.columns, "importance": model.feature_importances_}
+        ).sort_values("importance", ascending=False)
         mlflow.log_text(importances.to_csv(index=False), "feature_importances.csv")
 
         # Log model

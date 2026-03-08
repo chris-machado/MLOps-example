@@ -9,13 +9,21 @@ from fastapi.testclient import TestClient
 @pytest.fixture
 def client(tmp_path, monkeypatch):
     """Create a test client with mock model artifacts."""
-    from sklearn.ensemble import RandomForestClassifier
-    from sklearn.preprocessing import StandardScaler, LabelEncoder
     import joblib
+    from sklearn.ensemble import RandomForestClassifier
+    from sklearn.preprocessing import LabelEncoder, StandardScaler
 
     # Create mock artifacts
     n_features = 27
-    classes = ["Bumps", "Dirtiness", "K_Scratch", "Other_Faults", "Pastry", "Stains", "Z_Scratch"]
+    classes = [
+        "Bumps",
+        "Dirtiness",
+        "K_Scratch",
+        "Other_Faults",
+        "Pastry",
+        "Stains",
+        "Z_Scratch",
+    ]
 
     le = LabelEncoder()
     le.fit(classes)
@@ -36,7 +44,9 @@ def client(tmp_path, monkeypatch):
 
     # Force reimport so the module loads from tmp_path
     import importlib
+
     import src.serve.app as app_module
+
     importlib.reload(app_module)
 
     return TestClient(app_module.app)

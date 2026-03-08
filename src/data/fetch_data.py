@@ -6,7 +6,9 @@ import pandas as pd
 from ucimlrepo import fetch_ucirepo
 
 
-def fetch_steel_plates_data(output_path: str = "data/raw/steel_plates_faults.csv") -> str:
+def fetch_steel_plates_data(
+    output_path: str = "data/raw/steel_plates_faults.csv",
+) -> str:
     """Download the Steel Plates Faults dataset from UCI ML Repository.
 
     Dataset: https://archive.ics.uci.edu/dataset/198/steel+plates+faults
