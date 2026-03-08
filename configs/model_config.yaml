@@ -15,7 +15,7 @@ model:
 
 mlflow:
   experiment_name: steel-fault-detection
-  tracking_uri: http://localhost:5000
+  tracking_uri: sqlite:///mlflow.db
 
 serving:
   host: 0.0.0.0
