@@ -1,10 +1,7 @@
 """Tests for data preprocessing pipeline."""
 
-import os
-import tempfile
-
-import pandas as pd
 import numpy as np
+import pandas as pd
 import pytest
 import yaml
 

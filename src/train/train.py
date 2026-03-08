@@ -2,13 +2,13 @@
 
 import os
 
+import joblib
 import mlflow
 import mlflow.sklearn
 import pandas as pd
 import yaml
-import joblib
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, f1_score, classification_report
+from sklearn.metrics import accuracy_score, classification_report, f1_score
 
 
 def load_config(config_path: str = "configs/model_config.yaml") -> dict:
