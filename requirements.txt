@@ -1,0 +1,27 @@
+# Core ML
+scikit-learn==1.6.1
+pandas==2.2.3
+numpy==2.2.3
+
+# Experiment tracking
+mlflow==2.21.0
+
+# Model serving
+fastapi==0.115.8
+uvicorn==0.34.0
+pydantic==2.10.6
+
+# Monitoring
+evidently==0.6.7
+
+# Data versioning
+dvc==3.59.1
+
+# Testing
+pytest==8.3.4
+httpx==0.28.1
+
+# Utilities
+joblib==1.4.2
+pyyaml==6.0.2
+python-dotenv==1.0.1

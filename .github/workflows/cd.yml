@@ -1,0 +1,38 @@
+name: CD Pipeline
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch data
+        run: python -m src.data.fetch_data
+
+      - name: Preprocess
+        run: python -m src.data.preprocess
+
+      - name: Train model
+        env:
+          MLFLOW_TRACKING_URI: sqlite:///mlflow.db
+        run: python -m src.train.train
+
+      - name: Evaluate model
+        run: python -m src.evaluate.evaluate
+
+      - name: Build and push serving image
+        run: |
+          docker build -f docker/Dockerfile.serve -t steel-fault-serve:${{ github.ref_name }} .
+          docker tag steel-fault-serve:${{ github.ref_name }} steel-fault-serve:latest
